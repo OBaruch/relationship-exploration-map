@@ -28,6 +28,8 @@ npm run local:stack:down
 
 Servidor por defecto: `http://localhost:8080`.
 
+Nota de entorno: si tu sistema ya define `PORT` (comun en CI o wrappers), el proyecto usa `APP_PORT` para forzar el puerto local. Ejemplo: `APP_PORT=8080 npm run dev`.
+
 ## API
 - `GET /api/health`
 - `GET /api/maps`

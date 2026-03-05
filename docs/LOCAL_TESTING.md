@@ -5,7 +5,7 @@ Este proyecto ya queda preparado para probarse localmente de dos formas.
 ## Opcion A: rapido (solo Node)
 ```bash
 npm install
-npm run dev
+APP_PORT=8080 npm run dev
 npm run local:check
 ```
 Abrir:
