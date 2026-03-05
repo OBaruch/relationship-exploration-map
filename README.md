@@ -43,4 +43,5 @@ Servidor por defecto: `http://localhost:8080`.
 - [Roadmap MVP](docs/ROADMAP_MVP.md)
 - [Arquitectura tecnica](docs/ARCHITECTURE.md)
 - [Deploy en VPS](docs/DEPLOY_VPS.md)
+- [Manual Wix subdominio](docs/WIX_SUBDOMINIO_MANUAL.md)
 - [Checklist de calidad](docs/QUALITY_CHECKLIST.md)
