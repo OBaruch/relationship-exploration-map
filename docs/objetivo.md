@@ -257,7 +257,7 @@ Un estado adicional posible sería para indicar que el tema ya fue conversado, a
 
 Las minas son una de las partes más importantes del sistema.
 
-En la metáfora original del buscaminas, una mina es un peligro oculto.  
+En la metáfora original del buscaminas windows xp game , una mina es un peligro oculto.  
 Aquí se resignifica para representar zonas relacionales de alta sensibilidad.
 
 ### 7.1 Qué puede ser una mina
