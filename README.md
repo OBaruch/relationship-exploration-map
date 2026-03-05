@@ -21,6 +21,9 @@ npm install
 npm run dev
 npm test
 npm run smoke
+npm run local:stack:up
+npm run local:stack:check
+npm run local:stack:down
 ```
 
 Servidor por defecto: `http://localhost:8080`.
@@ -42,6 +45,7 @@ Servidor por defecto: `http://localhost:8080`.
 - [Objetivo del producto](docs/objetivo.md)
 - [Roadmap MVP](docs/ROADMAP_MVP.md)
 - [Arquitectura tecnica](docs/ARCHITECTURE.md)
+- [Pruebas locales completas](docs/LOCAL_TESTING.md)
 - [Deploy en VPS](docs/DEPLOY_VPS.md)
 - [Manual Wix subdominio](docs/WIX_SUBDOMINIO_MANUAL.md)
 - [Checklist de calidad](docs/QUALITY_CHECKLIST.md)

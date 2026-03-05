@@ -1,22 +1,23 @@
 # Repository Guidelines
 
 ## Project Structure & Module Organization
-- `public/`: Frontend static app served by Node (`index.html`, `assets/styles.css`, `assets/app.js`).
-- `src/server/`: Backend HTTP modular:
-  - `config.js` for runtime settings.
-  - `routes/api.js` for API routing.
-  - `storage/mapStore.js` for map persistence.
-  - `static/serveStatic.js` for static file serving.
-- `docs/`: Product and planning docs (`objetivo.md`, `ROADMAP_MVP.md`).
-- `tests/`: Node test runner specs (`*.test.js`).
-- `data/`: Runtime persistence (`maps.json`, ignored in git except folder marker).
+- `public/`: Frontend app (`index.html`, `assets/styles.css`, `assets/app.js`).
+- `src/server/`: Backend Node modular (`config.js`, `app.js`, `routes/`, `storage/`, `http/`, `static/`).
+- `docs/`: Product, architecture, local testing, deploy, and roadmap documentation.
+- `tests/`: Backend tests (`*.test.js`) using Node test runner.
+- `scripts/`: Smoke/local validation scripts.
+- `ops/nginx/`: Local reverse-proxy config.
+- `data/`: Runtime persistence (`maps.json` is generated runtime and ignored in git).
 
 ## Build, Test, and Development Commands
-- `npm install`: Install dependencies (none external now, keeps workflow standard).
-- `npm run dev`: Start local server on `http://localhost:8080`.
-- `npm start`: Start production server.
-- `npm test`: Run backend unit tests (`node --test`).
-- `npm run smoke`: Basic API smoke check (`/api/health`, `/api/maps`) with server running.
+- `npm install`: Install project dependencies.
+- `npm run dev`: Start app locally on `http://localhost:8080`.
+- `npm run local:check`: Validate local host routing against `mapa.localhost:8080`.
+- `npm run local:stack:up`: Start Docker local stack (`app + nginx`) on port `80`.
+- `npm run local:stack:check`: Validate reverse proxy via `http://mapa.localhost`.
+- `npm run local:stack:down`: Stop Docker local stack.
+- `npm test`: Run unit tests.
+- `npm run smoke`: API smoke check (`/api/health`, `/api/maps`) with app running.
 - `git status` / `git diff`: Review local changes before committing.
 
 ## Coding Style & Naming Conventions
@@ -28,8 +29,11 @@
 
 ## Testing Guidelines
 Use both automated and manual checks:
-- Automated: add/maintain tests in `tests/` for storage and API behavior.
+- Automated: maintain tests in `tests/` for storage and API behavior.
+- Run `npm test` before every commit.
+- Run `npm run smoke` after backend changes.
 - Verify all modes: `Explorar`, `Editar minas`, `Marcar completado`, `Transformar mina`.
+- Verify `Reflexionar bloque` and notes persistence.
 - Confirm mirrored behavior: left/right cells update symmetrically when expected.
 - Confirm counters update correctly (`Bloques explorados`, `Minas activas`).
 - Test responsive layout around desktop and mobile breakpoints.

@@ -8,7 +8,12 @@
     "start": "node src/server/index.js",
     "dev": "node src/server/index.js",
     "test": "node --test --test-isolation=none",
-    "smoke": "node scripts/smoke.js"
+    "smoke": "node scripts/smoke.js",
+    "local:stack:up": "docker compose -f docker-compose.local.yml up -d --build",
+    "local:stack:down": "docker compose -f docker-compose.local.yml down",
+    "local:stack:logs": "docker compose -f docker-compose.local.yml logs -f",
+    "local:check": "node scripts/local-check.js",
+    "local:stack:check": "node scripts/local-check.js --port 80"
   },
   "engines": {
     "node": ">=18"
