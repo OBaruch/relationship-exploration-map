@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mapa Relacional Interactivo</title>
+  <meta
+    name="description"
+    content="Aplicacion para explorar limites, apego, reciprocidad y madurez en relaciones."
+  />
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <h1>Mapa Relacional Interactivo</h1>
+      <p>
+        Herramienta visual para conversar sobre apego, limites, exploracion, reciprocidad
+        y reparacion. El tablero esta espejado: cada accion de un lado impacta el bloque
+        equivalente del otro lado.
+      </p>
+      <div class="badges">
+        <span class="badge">Centro = base segura</span>
+        <span class="badge">Espejo = contrato reciproco</span>
+        <span class="badge">Minas = limites sensibles</span>
+        <span class="badge">Transformar = trabajo consciente</span>
+        <span class="badge">Reflexionar = tema conversado</span>
+      </div>
+    </section>
+
+    <section class="layout">
+      <section class="panel">
+        <div class="controls">
+          <div class="control-row">
+            <label>
+              Titulo del mapa
+              <input id="mapTitle" type="text" placeholder="Ejemplo: Sesion inicial" />
+            </label>
+            <label>
+              Modo
+              <select id="toolMode">
+                <option value="explore">Explorar</option>
+                <option value="mine">Editar minas</option>
+                <option value="complete">Marcar completado</option>
+                <option value="transform">Transformar mina</option>
+                <option value="reflect">Reflexionar bloque</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="control-row">
+            <label>
+              Persona A (izquierda)
+              <input id="personA" type="text" value="Persona A" />
+            </label>
+            <label>
+              Persona B (derecha)
+              <input id="personB" type="text" value="Persona B" />
+            </label>
+          </div>
+
+          <div class="control-row-3">
+            <label>
+              ID mapa
+              <input id="mapIdInput" type="text" placeholder="ID para cargar" />
+            </label>
+            <label>
+              Mapas guardados
+              <select id="savedMaps"></select>
+            </label>
+            <label>
+              Estado API
+              <input id="healthStatus" type="text" value="Verificando..." readonly />
+            </label>
+          </div>
+
+          <div class="button-inline">
+            <button id="newBtn" type="button">Nuevo mapa</button>
+            <button id="hintsBtn" type="button">Mostrar etiquetas</button>
+            <button id="saveBtn" type="button">Guardar mapa</button>
+            <button id="loadByIdBtn" type="button">Cargar por ID</button>
+            <button id="loadSelectedBtn" type="button">Cargar seleccionado</button>
+            <button id="refreshBtn" type="button">Actualizar lista</button>
+          </div>
+          <div id="actionStatus" class="status"></div>
+        </div>
+
+        <div id="board" class="board"></div>
+      </section>
+
+      <aside class="aside">
+        <section class="panel">
+          <h2>Detalle del bloque</h2>
+          <div id="detail" class="detail">
+            Selecciona un bloque para ver su lectura y registrar notas.
+          </div>
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Explorados</div>
+              <div id="countExplored" class="value">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Minas activas</div>
+              <div id="countMines" class="value">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Reflexionados</div>
+              <div id="countReflected" class="value">0</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Nota por bloque</h2>
+          <label>
+            Bloque seleccionado
+            <input id="noteCellKey" type="text" value="Ninguno" readonly />
+          </label>
+          <label>
+            Nota
+            <textarea
+              id="noteText"
+              placeholder="Ejemplo: este limite surge por una herida previa."
+            ></textarea>
+          </label>
+          <div class="button-inline">
+            <button id="saveNoteBtn" type="button">Guardar nota local</button>
+            <button id="clearNoteBtn" type="button">Limpiar nota</button>
+          </div>
+        </section>
+
+        <section class="panel">
+          <h2>Uso responsable</h2>
+          <p class="footnote">
+            Esta app no diagnostica ni reemplaza terapia. Sirve para abrir conversacion y
+            visualizar acuerdos, asimetrias y procesos de reparacion en pareja.
+          </p>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script src="/assets/app.js" defer></script>
+</body>
+</html>

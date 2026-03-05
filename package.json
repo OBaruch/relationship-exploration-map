@@ -1,0 +1,16 @@
+{
+  "name": "relationship-exploration-map",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mapa relacional interactivo con backend Node y frontend estatico",
+  "main": "src/server/index.js",
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "node src/server/index.js",
+    "test": "node --test --test-isolation=none",
+    "smoke": "node scripts/smoke.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
