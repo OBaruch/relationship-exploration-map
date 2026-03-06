@@ -1,4 +1,4 @@
-const port = Number(process.env.APP_PORT || process.env.PORT || 8080);
+const port = Number(process.env.APP_PORT || 8080);
 const baseUrl = process.env.BASE_URL || `http://127.0.0.1:${Number.isInteger(port) && port > 0 ? port : 8080}`;
 
 async function run() {

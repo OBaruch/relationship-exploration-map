@@ -6,7 +6,7 @@ function parsePortArg() {
     const value = Number(process.argv[index + 1]);
     if (Number.isInteger(value) && value > 0) return value;
   }
-  const envPort = Number(process.env.LOCAL_CHECK_PORT || process.env.APP_PORT || process.env.PORT || "8080");
+  const envPort = Number(process.env.LOCAL_CHECK_PORT || process.env.APP_PORT || "8080");
   return Number.isInteger(envPort) && envPort > 0 ? envPort : 8080;
 }
 
