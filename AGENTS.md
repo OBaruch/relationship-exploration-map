@@ -17,6 +17,8 @@
 - `npm run local:stack:check`: Validate reverse proxy via `http://mapa.localhost`.
 - `npm run local:stack:down`: Stop Docker local stack.
 - `npm test`: Run unit tests.
+- `npm run security:scan`: Scan working tree for potential leaked secrets.
+- `npm run security:scan:history`: Scan git history for sensitive patterns.
 - `npm run smoke`: API smoke check (`/api/health`, `/api/maps`) with app running.
 - `git status` / `git diff`: Review local changes before committing.
 
@@ -31,6 +33,7 @@
 Use both automated and manual checks:
 - Automated: maintain tests in `tests/` for storage and API behavior.
 - Run `npm test` before every commit.
+- Run `npm run security:scan` before every push.
 - Run `npm run smoke` after backend changes.
 - Verify all modes: `Explorar`, `Editar minas`, `Marcar completado`, `Transformar mina`.
 - Verify `Reflexionar bloque` and notes persistence.

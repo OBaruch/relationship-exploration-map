@@ -39,23 +39,21 @@
             <label>
               Modo
               <select id="toolMode">
-                <option value="explore">Explorar</option>
-                <option value="mine">Editar minas</option>
-                <option value="complete">Marcar completado</option>
-                <option value="transform">Transformar mina</option>
-                <option value="reflect">Reflexionar bloque</option>
+                <option value="explore">Desbloquear por turnos</option>
+                <option value="mine">Marcar no negociable (mina)</option>
+                <option value="reflect">Solo revisar bloques</option>
               </select>
             </label>
           </div>
 
           <div class="control-row">
             <label>
-              Persona A (izquierda)
-              <input id="personA" type="text" value="Persona A" />
+              Hombre (izquierda)
+              <input id="personA" type="text" value="Hombre" readonly />
             </label>
             <label>
-              Persona B (derecha)
-              <input id="personB" type="text" value="Persona B" />
+              Mujer (derecha)
+              <input id="personB" type="text" value="Mujer" readonly />
             </label>
           </div>
 
@@ -82,6 +80,7 @@
             <button id="loadSelectedBtn" type="button">Cargar seleccionado</button>
             <button id="refreshBtn" type="button">Actualizar lista</button>
           </div>
+          <div id="turnStatus" class="status"></div>
           <div id="actionStatus" class="status"></div>
         </div>
 
@@ -139,6 +138,18 @@
       </aside>
     </section>
   </main>
+
+  <dialog id="blockModal" class="block-modal">
+    <article class="modal-card">
+      <h3 id="modalTitle">Bloque</h3>
+      <p id="modalBody"></p>
+      <div class="button-inline">
+        <button id="modalUnlockBtn" type="button">Desbloquear</button>
+        <button id="modalSkipBtn" type="button">No realizar</button>
+        <button id="modalCloseBtn" type="button">Cerrar</button>
+      </div>
+    </article>
+  </dialog>
 
   <script src="/assets/app.js" defer></script>
 </body>

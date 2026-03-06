@@ -20,6 +20,7 @@ Aplicacion web para mapear dinamicas de pareja (apego, limites, minas sensibles,
 npm install
 npm run dev
 npm test
+npm run security:scan
 npm run smoke
 npm run local:stack:up
 npm run local:stack:check
@@ -28,12 +29,18 @@ npm run local:stack:down
 
 Servidor por defecto: `http://localhost:8080`.
 
+Nota de entorno: si tu sistema ya define `PORT` (comun en CI o wrappers), el proyecto usa `APP_PORT` para forzar el puerto local. Ejemplo: `APP_PORT=8080 npm run dev`.
+
 ## API
 - `GET /api/health`
 - `GET /api/maps`
 - `POST /api/maps`
 - `GET /api/maps/:id`
 - `PUT /api/maps/:id`
+
+## Seguridad
+- `npm run security:scan`: escanea el working tree por posibles secretos.
+- `npm run security:scan:history`: escanea patrones sensibles en historial Git.
 
 ## Despliegue VPS (resumen)
 1. Instalar Node.js 18+ y clonar repo.
