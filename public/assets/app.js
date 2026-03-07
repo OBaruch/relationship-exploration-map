@@ -108,6 +108,13 @@ const els = {
   countExplored: document.getElementById("countExplored"),
   countMines: document.getElementById("countMines"),
   countReflected: document.getElementById("countReflected"),
+  maleExplorationMeta: document.getElementById("maleExplorationMeta"),
+  femaleExplorationMeta: document.getElementById("femaleExplorationMeta"),
+  maleExplorationStyle: document.getElementById("maleExplorationStyle"),
+  femaleExplorationStyle: document.getElementById("femaleExplorationStyle"),
+  maleScoreBar: document.getElementById("maleScoreBar"),
+  femaleScoreBar: document.getElementById("femaleScoreBar"),
+  explorationLeader: document.getElementById("explorationLeader"),
   noteCellKey: document.getElementById("noteCellKey"),
   noteText: document.getElementById("noteText"),
   newBtn: document.getElementById("newBtn"),
@@ -161,6 +168,9 @@ function createCell(r, c) {
     center: c === CENTER,
     unlocked: c === CENTER || Math.abs(c - CENTER) === 1,
     completed: c === CENTER,
+    directUnlocked: false,
+    mirroredUnlocked: false,
+    mirroredBy: null,
     mine: false,
     disarmed: false,
     reflected: false,
@@ -221,6 +231,15 @@ function getPlayerOnCell(cell) {
   return null;
 }
 
+function ownerForCell(cell) {
+  if (cell.center) return null;
+  return cell.c < CENTER ? "male" : "female";
+}
+
+function playerLabel(player) {
+  return player === "male" ? "Hombre" : "Mujer";
+}
+
 function describeTurn() {
   return appState.turn === "male" ? "Turno: 👨 Hombre" : "Turno: 👩 Mujer";
 }
@@ -237,7 +256,13 @@ function explain(cell) {
   text += `Lado: <strong>${side}</strong>.`;
 
   if (cell.mine && !cell.disarmed) text += "<br><br>⚠️ No negociable (mina activa).";
-  if (cell.completed) text += "<br><br>✅ Desbloqueado.";
+  if (cell.directUnlocked) {
+    text += `<br><br>✅ Desbloqueado directo por <strong>${playerLabel(ownerForCell(cell))}</strong> (color sólido).`;
+  } else if (cell.mirroredUnlocked) {
+    text += `<br><br>🪞 Desbloqueado por reflejo desde <strong>${playerLabel(cell.mirroredBy || (ownerForCell(cell) === "male" ? "female" : "male"))}</strong> (color tenue).`;
+  } else if (cell.completed) {
+    text += "<br><br>✅ Desbloqueado.";
+  }
 
   const note = appState.notes[cellKey(cell)];
   if (note) text += `<br><br><strong>Nota:</strong> ${note}`;
@@ -248,6 +273,72 @@ function explain(cell) {
 function setStatus(message, isError = false) {
   els.actionStatus.style.color = isError ? "var(--danger)" : "var(--muted)";
   els.actionStatus.textContent = message;
+}
+
+function classifyExploration(stats) {
+  if (stats.actions === 0) return "Conservador/a (sin explorar aún)";
+  if (stats.maxDepth >= 4 || stats.score >= 16) return "Aventurero/a";
+  if (stats.maxDepth <= 2 && stats.actions <= 2) return "Conservador/a";
+  return "Intermedio/a";
+}
+
+function computeExplorationStats(player) {
+  const stats = {
+    actions: 0,
+    mirrored: 0,
+    depthSum: 0,
+    maxDepth: 0,
+    avgDepth: 0,
+    score: 0,
+    style: "Conservador/a",
+  };
+
+  appState.board.flat().forEach((cell) => {
+    if (cell.center) return;
+    if (ownerForCell(cell) !== player) return;
+
+    const depth = Math.abs(cell.c - CENTER);
+
+    if (cell.directUnlocked) {
+      stats.actions += 1;
+      stats.depthSum += depth;
+      stats.maxDepth = Math.max(stats.maxDepth, depth);
+    } else if (cell.mirroredUnlocked) {
+      stats.mirrored += 1;
+    }
+  });
+
+  stats.avgDepth = stats.actions > 0 ? stats.depthSum / stats.actions : 0;
+  stats.score = Number((stats.actions * 2 + stats.avgDepth * 2.5 + stats.maxDepth * 1.5).toFixed(2));
+  stats.style = classifyExploration(stats);
+
+  return stats;
+}
+
+function updateExplorationPanel() {
+  if (!els.maleExplorationMeta || !els.femaleExplorationMeta) return;
+
+  const male = computeExplorationStats("male");
+  const female = computeExplorationStats("female");
+
+  const maxScore = Math.max(male.score, female.score, 1);
+
+  els.maleExplorationMeta.textContent = `Acciones ${male.actions} · Reflejos ${male.mirrored} · Profundidad ${male.maxDepth}`;
+  els.femaleExplorationMeta.textContent = `Acciones ${female.actions} · Reflejos ${female.mirrored} · Profundidad ${female.maxDepth}`;
+  els.maleExplorationStyle.textContent = male.style;
+  els.femaleExplorationStyle.textContent = female.style;
+
+  els.maleScoreBar.style.width = `${Math.max(6, (male.score / maxScore) * 100)}%`;
+  els.femaleScoreBar.style.width = `${Math.max(6, (female.score / maxScore) * 100)}%`;
+
+  const diff = male.score - female.score;
+  if (Math.abs(diff) < 0.85) {
+    els.explorationLeader.textContent = "Exploración: equilibrio entre ambos.";
+  } else if (diff > 0) {
+    els.explorationLeader.textContent = "Exploración: Hombre más aventurero en este mapa.";
+  } else {
+    els.explorationLeader.textContent = "Exploración: Mujer más aventurera en este mapa.";
+  }
 }
 
 function updateStats() {
@@ -265,6 +356,7 @@ function updateStats() {
   els.countMines.textContent = String(mines);
   els.countReflected.textContent = String(reflected);
   els.turnStatus.textContent = describeTurn();
+  updateExplorationPanel();
 }
 
 function updateDetail(cell) {
@@ -336,12 +428,22 @@ function render() {
 
       if (cell.center) button.classList.add("center");
       if (cell.unlocked && !cell.center) button.classList.add("unlocked");
-      if (cell.completed && !cell.center) button.classList.add("completed");
       if (cell.mine && !cell.disarmed) button.classList.add("mine");
       if (cell.disarmed) button.classList.add("disarmed");
       if (cell.reflected) button.classList.add("reflected");
       if (!cell.unlocked && !cell.center) button.classList.add("blocked");
       if (appState.selectedKey === cellKey(cell)) button.classList.add("selected");
+
+      if (cell.directUnlocked && !cell.center) {
+        const owner = ownerForCell(cell);
+        button.classList.add(`direct-${owner}`);
+      } else if (cell.mirroredUnlocked && !cell.center) {
+        button.classList.add("mirrored-soft");
+        if (cell.mirroredBy === "male") button.classList.add("mirror-from-male");
+        if (cell.mirroredBy === "female") button.classList.add("mirror-from-female");
+      } else if (cell.completed && !cell.center) {
+        button.classList.add("completed");
+      }
 
       const occupied = getPlayerOnCell(cell);
       if (occupied === "male") button.textContent = "👨";
@@ -407,15 +509,23 @@ function unlockCellForCurrentTurn(cell) {
 
   cell.completed = true;
   cell.unlocked = true;
+  cell.directUnlocked = true;
+  cell.mirroredUnlocked = false;
+  cell.mirroredBy = null;
+
   applyMirror(cell, (mirror) => {
     mirror.completed = true;
     mirror.unlocked = true;
+    if (!mirror.directUnlocked) {
+      mirror.mirroredUnlocked = true;
+      mirror.mirroredBy = appState.turn;
+    }
   });
 
   player.r = cell.r;
   player.c = cell.c;
 
-  setStatus(`Bloque desbloqueado por ${appState.turn === "male" ? "Hombre" : "Mujer"}.`);
+  setStatus(`Bloque desbloqueado por ${playerLabel(appState.turn)}.`);
   nextTurn();
   render();
 }
@@ -425,7 +535,7 @@ function skipCellForCurrentTurn(cell) {
   applyMirror(cell, (mirror) => {
     mirror.reflected = true;
   });
-  setStatus(`${appState.turn === "male" ? "Hombre" : "Mujer"} decidió no realizar este bloque por ahora.`);
+  setStatus(`${playerLabel(appState.turn)} decidió no realizar este bloque por ahora.`);
   nextTurn();
   render();
 }
@@ -446,11 +556,21 @@ function handleCellClick(cell) {
     }
     cell.mine = !(cell.mine && !cell.disarmed);
     cell.disarmed = false;
-    if (cell.mine) cell.completed = false;
+    if (cell.mine) {
+      cell.completed = false;
+      cell.directUnlocked = false;
+      cell.mirroredUnlocked = false;
+      cell.mirroredBy = null;
+    }
     applyMirror(cell, (mirror) => {
       mirror.mine = cell.mine;
       mirror.disarmed = cell.disarmed;
-      if (cell.mine) mirror.completed = false;
+      if (cell.mine) {
+        mirror.completed = false;
+        mirror.directUnlocked = false;
+        mirror.mirroredUnlocked = false;
+        mirror.mirroredBy = null;
+      }
     });
     setStatus(cell.mine ? "No negociable marcado (mina activa)." : "Mina removida.");
     render();
@@ -482,6 +602,9 @@ function boardPayload() {
       center: cell.center,
       unlocked: cell.unlocked,
       completed: cell.completed,
+      directUnlocked: cell.directUnlocked,
+      mirroredUnlocked: cell.mirroredUnlocked,
+      mirroredBy: cell.mirroredBy,
       mine: cell.mine,
       disarmed: cell.disarmed,
       reflected: cell.reflected,

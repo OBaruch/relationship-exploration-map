@@ -344,6 +344,34 @@ button:hover {
 .section-proyecto { background-color: rgba(250, 204, 21, 0.14); }
 .section-limites { background-color: rgba(251, 113, 133, 0.14); }
 
+.direct-male {
+  box-shadow: inset 0 0 0 999px rgba(56, 189, 248, 0.34);
+  border-color: rgba(56, 189, 248, 0.95);
+  color: #eff9ff;
+}
+
+.direct-female {
+  box-shadow: inset 0 0 0 999px rgba(244, 114, 182, 0.34);
+  border-color: rgba(244, 114, 182, 0.95);
+  color: #fff1f7;
+}
+
+.mirrored-soft {
+  border-style: dashed;
+}
+
+.mirror-from-male {
+  box-shadow: inset 0 0 0 999px rgba(56, 189, 248, 0.14);
+  border-color: rgba(125, 211, 252, 0.52);
+  color: #d9f1ff;
+}
+
+.mirror-from-female {
+  box-shadow: inset 0 0 0 999px rgba(244, 114, 182, 0.14);
+  border-color: rgba(244, 114, 182, 0.52);
+  color: #fde8f1;
+}
+
 .mine {
   background: linear-gradient(180deg, rgba(251, 113, 133, 0.26), rgba(251, 113, 133, 0.1));
   border-color: rgba(251, 113, 133, 0.65);
@@ -408,6 +436,86 @@ button:hover {
   font-size: 24px;
   font-weight: 700;
   margin-top: 2px;
+}
+
+.exploration-box {
+  margin-top: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  background: #0b1421;
+  padding: 12px;
+  display: grid;
+  gap: 10px;
+}
+
+.exploration-box h3 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.explorer-row {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+  padding: 8px;
+  display: grid;
+  gap: 6px;
+}
+
+.explorer-row.male {
+  border-color: rgba(56, 189, 248, 0.44);
+}
+
+.explorer-row.female {
+  border-color: rgba(244, 114, 182, 0.44);
+}
+
+.explorer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.explorer-style {
+  font-size: 11px;
+  color: #d3e0f0;
+}
+
+.score-track {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.score-bar {
+  height: 100%;
+  display: block;
+  width: 8%;
+  border-radius: 999px;
+}
+
+.score-bar.male {
+  background: linear-gradient(90deg, #38bdf8, #22d3ee);
+}
+
+.score-bar.female {
+  background: linear-gradient(90deg, #f472b6, #fb7185);
+}
+
+.explorer-meta {
+  margin: 0;
+  color: #bdd0e8;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.exploration-leader {
+  margin: 0;
+  font-size: 12px;
+  color: #e2ecfa;
 }
 
 .footnote {
