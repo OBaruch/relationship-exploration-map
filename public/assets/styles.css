@@ -130,7 +130,7 @@ h2 {
 
 .doc-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 10px;
 }
 
@@ -151,6 +151,13 @@ h2 {
   color: #ccdaec;
   font-size: 13px;
   line-height: 1.5;
+}
+
+.research-note {
+  margin: 12px 2px 0;
+  color: #b9c9de;
+  font-size: 12px;
+  line-height: 1.55;
 }
 
 .image-grid {

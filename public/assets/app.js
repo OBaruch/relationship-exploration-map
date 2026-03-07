@@ -1,23 +1,97 @@
 const SIZE = 11;
 const CENTER = Math.floor(SIZE / 2);
 
-const ZONES = [
-  { r: 1, d: 1, key: "confianza", label: "Confianza", section: "confianza", text: "Confianza diaria, transparencia y cuidado mutuo." },
-  { r: 1, d: 3, key: "comunicacion", label: "Comunicación", section: "comunicacion", text: "Cómo hablar, escuchar y reparar discusiones." },
-  { r: 2, d: 2, key: "amistades", label: "Amistades", section: "limites", text: "Límites con terceros y amistades cercanas." },
-  { r: 2, d: 4, key: "planes", label: "Planes", section: "proyecto", text: "Planes en pareja y coordinación de tiempo." },
-  { r: 3, d: 1, key: "espacio", label: "Espacio", section: "limites", text: "Espacio personal sin romper acuerdos." },
-  { r: 3, d: 3, key: "trabajo", label: "Trabajo", section: "proyecto", text: "Ritmos de trabajo y apoyo mutuo." },
-  { r: 4, d: 2, key: "familia", label: "Familia", section: "confianza", text: "Relación con familia de origen y fronteras." },
-  { r: 5, d: 1, key: "rutina", label: "Rutina", section: "proyecto", text: "Convivencia diaria y tareas compartidas." },
-  { r: 6, d: 1, key: "vulnerabilidad", label: "Vulnerabilidad", section: "confianza", text: "Expresar miedo, necesidad y cuidado emocional." },
-  { r: 7, d: 2, key: "sexualidad", label: "Sexualidad", section: "intimidad", text: "Deseo, acuerdos íntimos y seguridad emocional." },
-  { r: 8, d: 1, key: "celos", label: "Celos", section: "limites", text: "Gestionar celos y miedo a la pérdida." },
-  { r: 8, d: 3, key: "secretos", label: "Secretos", section: "confianza", text: "Qué se comparte y cómo se cuida la verdad." },
-  { r: 9, d: 2, key: "control", label: "Control", section: "limites", text: "Evitar vigilancia, manipulación o rigidez." },
-  { r: 9, d: 4, key: "traicion", label: "Traición", section: "intimidad", text: "Qué significa traición y qué no es negociable." },
-  { r: 10, d: 3, key: "reparacion", label: "Reparación", section: "comunicacion", text: "Cómo reparar y reconstruir confianza." },
-];
+const SECTION_LABELS = {
+  confianza: "Confianza",
+  comunicacion: "Comunicación",
+  intimidad: "Intimidad",
+  proyecto: "Proyecto de vida",
+  limites: "Límites",
+};
+
+const SECTION_ORDER = ["confianza", "comunicacion", "intimidad", "proyecto", "limites"];
+
+const SITUATION_LIBRARY = {
+  confianza: [
+    { label: "Transparencia", text: "Cuando uno oculta conversaciones en redes y el otro percibe distancia." },
+    { label: "Promesa rota", text: "Cuando se promete un cambio importante y no se cumple en el tiempo acordado." },
+    { label: "Versiones", text: "Cuando la historia de un hecho cambia y aparece duda sobre la verdad." },
+    { label: "Mentira blanca", text: "Cuando se minimiza un dato ‘para evitar conflicto’ y luego genera desconfianza." },
+    { label: "Ex pareja", text: "Cuando reaparece contacto con una ex pareja sin acuerdo previo." },
+    { label: "Revisar celular", text: "Cuando alguien quiere revisar el teléfono para calmar inseguridad." },
+    { label: "Secreto ajeno", text: "Cuando se comparte un secreto de la pareja con amistades o familia." },
+    { label: "Lealtad social", text: "Cuando en público uno ridiculiza o desautoriza al otro." },
+    { label: "Ausencia emocional", text: "Cuando uno necesita apoyo y el otro se desconecta afectivamente." },
+    { label: "Acuerdo roto", text: "Cuando se rompe un acuerdo explícito y no hay reparación inmediata." },
+    { label: "Reconstrucción", text: "Cuando hay que recuperar confianza después de una falta seria." },
+  ],
+  comunicacion: [
+    { label: "Interrupciones", text: "Cuando una persona no deja terminar ideas y sube la tensión." },
+    { label: "Texto en frío", text: "Cuando una discusión importante se intenta resolver solo por chat." },
+    { label: "Silencio tenso", text: "Cuando pasan horas o días sin hablar después de una pelea." },
+    { label: "Suposiciones", text: "Cuando se adivinan intenciones sin preguntar directo." },
+    { label: "Crítica dura", text: "Cuando se ataca la personalidad y no una conducta puntual." },
+    { label: "Pausa sana", text: "Cuando se solicita tiempo para bajar intensidad sin desaparecer." },
+    { label: "Feedback", text: "Cuando se pide cambiar un hábito cotidiano que molesta." },
+    { label: "Conversación difícil", text: "Cuando se necesita abrir un tema delicado sin escalar." },
+    { label: "Disculpa real", text: "Cuando hay daño y hace falta disculpa específica con reparación." },
+    { label: "Escucha activa", text: "Cuando uno quiere ser escuchado sin ser corregido de inmediato." },
+    { label: "Desacuerdo crónico", text: "Cuando un tema se repite y nunca se cierra del todo." },
+  ],
+  intimidad: [
+    { label: "Frecuencia", text: "Cuando existe diferencia en deseo o frecuencia sexual." },
+    { label: "Consentimiento", text: "Cuando hay dudas sobre ritmo, límites y consentimiento explícito." },
+    { label: "Afecto público", text: "Cuando no coinciden en mostrar cariño frente a otras personas." },
+    { label: "Lenguajes amor", text: "Cuando cada quien expresa amor de forma distinta y no se siente recibido." },
+    { label: "Rechazo", text: "Cuando una iniciativa íntima no es correspondida y duele." },
+    { label: "Fantasías", text: "Cuando se comparten fantasías y se negocian límites de seguridad." },
+    { label: "Rutina íntima", text: "Cuando la intimidad se vuelve mecánica y poco conectada." },
+    { label: "Reparación física", text: "Cuando después de una pelea cuesta volver a acercarse." },
+    { label: "No sexual", text: "Cuando hace falta intimidad emocional sin componente sexual." },
+    { label: "Imagen corporal", text: "Cuando inseguridades físicas afectan el encuentro íntimo." },
+    { label: "Reconexión", text: "Cuando hay que reconstruir cercanía tras periodos de distancia." },
+  ],
+  proyecto: [
+    { label: "Presupuesto", text: "Cuando se define cómo dividir gastos y ahorrar cada mes." },
+    { label: "Tareas hogar", text: "Cuando la distribución de tareas domésticas se siente injusta." },
+    { label: "Carrera", text: "Cuando metas profesionales compiten con el tiempo de pareja." },
+    { label: "Mudanza", text: "Cuando surge decisión de cambiar de ciudad o vivienda." },
+    { label: "Tiempo pareja", text: "Cuando trabajo y agenda dejan poco espacio de calidad." },
+    { label: "Vacaciones", text: "Cuando no coinciden en tipo de descanso o presupuesto de viaje." },
+    { label: "Meta anual", text: "Cuando se acuerdan prioridades para los próximos 12 meses." },
+    { label: "Deudas", text: "Cuando una deuda personal impacta decisiones compartidas." },
+    { label: "Hijos", text: "Cuando hay diferencia sobre tener hijos, cuándo o cómo criarlos." },
+    { label: "Eventos familia", text: "Cuando se negocia asistencia a compromisos familiares." },
+    { label: "Plan crisis", text: "Cuando se prepara respuesta ante desempleo, enfermedad o emergencia." },
+  ],
+  limites: [
+    { label: "Privacidad digital", text: "Cuando se negocia qué es privado y qué se comparte online." },
+    { label: "Tiempo propio", text: "Cuando una persona pide espacio personal sin rechazo." },
+    { label: "Coqueteo", text: "Cuando hay conductas ambiguas con terceros en redes o eventos." },
+    { label: "Sustancias", text: "Cuando consumo de alcohol u otras sustancias afecta acuerdos." },
+    { label: "Sin insultos", text: "Cuando se define el límite de trato durante conflictos." },
+    { label: "Violencia cero", text: "Cuando se establece tolerancia cero a agresión verbal o física." },
+    { label: "Contacto ex", text: "Cuando se pactan reglas sobre contacto con ex parejas." },
+    { label: "Familia intrusiva", text: "Cuando familia externa opina o decide sobre la relación." },
+    { label: "Redes sociales", text: "Cuando no coinciden en qué publicar de la vida privada." },
+    { label: "Ubicación", text: "Cuando alguien exige reportes o ubicación en tiempo real." },
+    { label: "No negociables", text: "Cuando cada quien define límites que no está dispuesto a ceder." },
+  ],
+};
+
+const ZONES = Array.from({ length: SIZE }, (_, r) =>
+  SECTION_ORDER.map((section, index) => {
+    const situation = SITUATION_LIBRARY[section][r];
+    return {
+      r,
+      d: index + 1,
+      key: `${section}-${r + 1}`,
+      label: situation.label,
+      section,
+      text: situation.text,
+    };
+  })
+).flat();
 
 const els = {
   board: document.getElementById("board"),
@@ -158,7 +232,7 @@ function explain(cell) {
 
   const side = cell.c < CENTER ? "Hombre" : "Mujer";
   let text = `<strong>${cell.label || "Bloque"}</strong><br><br>`;
-  text += `Sección: <strong>${cell.section}</strong>.<br>`;
+  text += `Tema: <strong>${SECTION_LABELS[cell.section] || cell.section}</strong>.<br>`;
   text += `${cell.text || "Actividad/acción por definir"}<br><br>`;
   text += `Lado: <strong>${side}</strong>.`;
 
