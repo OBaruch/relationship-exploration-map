@@ -50,6 +50,8 @@ const els = {
   modalUnlockBtn: document.getElementById("modalUnlockBtn"),
   modalSkipBtn: document.getElementById("modalSkipBtn"),
   modalCloseBtn: document.getElementById("modalCloseBtn"),
+  introModal: document.getElementById("introModal"),
+  introContinueBtn: document.getElementById("introContinueBtn"),
 };
 
 const appState = {
@@ -204,6 +206,18 @@ function openModalForCell(cell) {
 function closeModal() {
   appState.modalCell = null;
   if (els.blockModal.open) els.blockModal.close();
+}
+
+function openIntroModal() {
+  if (!els.introModal) return;
+  if (els.introModal.showModal && !els.introModal.open) {
+    els.introModal.showModal();
+  }
+}
+
+function closeIntroModal() {
+  if (!els.introModal) return;
+  if (els.introModal.open) els.introModal.close();
 }
 
 function render() {
@@ -587,6 +601,10 @@ function bindEvents() {
   });
 
   els.modalCloseBtn.addEventListener("click", closeModal);
+
+  if (els.introContinueBtn) {
+    els.introContinueBtn.addEventListener("click", closeIntroModal);
+  }
 }
 
 async function init() {
@@ -595,6 +613,7 @@ async function init() {
   render();
   await Promise.all([checkHealth(), refreshMaps().catch(() => null)]);
   setStatus("App lista. Turnos activos: desbloqueo alternado 1 en 1.");
+  openIntroModal();
 }
 
 init();

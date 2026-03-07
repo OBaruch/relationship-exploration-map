@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-label="Apego evitativo">
+  <rect width="900" height="260" fill="#111827"/>
+  <g transform="translate(24,54)">
+    <rect x="0" y="0" width="94" height="56" rx="10" fill="#33415566" stroke="#64748b"/>
+    <rect x="104" y="0" width="94" height="56" rx="10" fill="#33415566" stroke="#64748b"/>
+    <rect x="208" y="0" width="94" height="56" rx="10" fill="#22d3ee22" stroke="#22d3ee"/>
+    <rect x="312" y="0" width="94" height="56" rx="10" fill="#33415566" stroke="#64748b"/>
+    <rect x="416" y="0" width="94" height="56" rx="10" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="520" y="0" width="94" height="56" rx="10" fill="#33415566" stroke="#64748b"/>
+    <rect x="624" y="0" width="94" height="56" rx="10" fill="#22d3ee22" stroke="#22d3ee"/>
+    <rect x="728" y="0" width="94" height="56" rx="10" fill="#33415566" stroke="#64748b"/>
+  </g>
+  <text x="24" y="34" font-size="24" fill="#cbd5e1" font-family="Segoe UI, sans-serif">Apego evitativo</text>
+  <text x="24" y="236" font-size="18" fill="#94a3b8" font-family="Segoe UI, sans-serif">Avance dosificado, prioriza control y autonomía antes de profundidad.</text>
+</svg>

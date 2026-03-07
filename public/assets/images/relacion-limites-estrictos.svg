@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="Tablero con límites estrictos">
+  <defs>
+    <linearGradient id="bgB" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1f1020"/>
+      <stop offset="100%" stop-color="#111827"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" fill="url(#bgB)"/>
+  <rect x="40" y="40" width="1120" height="440" rx="24" fill="#0f172a" stroke="#475569"/>
+
+  <g transform="translate(120,120)">
+    <rect width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+    <rect x="150" width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+    <rect x="300" width="130" height="90" rx="14" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="450" width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+    <rect x="600" width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+
+    <rect y="110" width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+    <rect x="150" y="110" width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="300" y="110" width="130" height="90" rx="14" fill="#c084fc44" stroke="#c084fc"/>
+    <rect x="450" y="110" width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="600" y="110" width="130" height="90" rx="14" fill="#fb718544" stroke="#fb7185"/>
+
+    <text x="50" y="55" font-size="40">💣</text>
+    <text x="205" y="55" font-size="40">💣</text>
+    <text x="505" y="55" font-size="40">💣</text>
+    <text x="655" y="55" font-size="40">💣</text>
+    <text x="50" y="165" font-size="40">💣</text>
+    <text x="655" y="165" font-size="40">💣</text>
+  </g>
+
+  <circle cx="315" cy="370" r="28" fill="#38bdf8"/>
+  <text x="315" y="378" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" fill="#fff">👨</text>
+  <circle cx="885" cy="370" r="28" fill="#f472b6"/>
+  <text x="885" y="378" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" fill="#fff">👩</text>
+
+  <text x="80" y="88" font-family="Segoe UI, sans-serif" font-size="32" fill="#fecdd3">Relación con límites estrictos</text>
+  <text x="80" y="462" font-family="Segoe UI, sans-serif" font-size="24" fill="#f9a8d4">Más no negociables, ritmo más cauteloso y negociación bloque por bloque.</text>
+</svg>

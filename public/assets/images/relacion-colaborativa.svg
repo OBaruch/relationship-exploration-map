@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-label="Tablero colaborativo">
+  <defs>
+    <linearGradient id="bgA" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="520" fill="url(#bgA)"/>
+  <rect x="40" y="40" width="1120" height="440" rx="24" fill="#0b1220" stroke="#334155"/>
+
+  <g transform="translate(130,120)">
+    <rect width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="150" width="130" height="90" rx="14" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="300" width="130" height="90" rx="14" fill="#f472b633" stroke="#f472b6"/>
+    <rect x="450" width="130" height="90" rx="14" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="600" width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+
+    <rect y="110" width="130" height="90" rx="14" fill="#fde04733" stroke="#fde047"/>
+    <rect x="150" y="110" width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="300" y="110" width="130" height="90" rx="14" fill="#c084fc44" stroke="#c084fc"/>
+    <rect x="450" y="110" width="130" height="90" rx="14" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="600" y="110" width="130" height="90" rx="14" fill="#fde04733" stroke="#fde047"/>
+  </g>
+
+  <circle cx="255" cy="370" r="28" fill="#38bdf8"/>
+  <text x="255" y="378" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" fill="#fff">👨</text>
+  <circle cx="945" cy="370" r="28" fill="#f472b6"/>
+  <text x="945" y="378" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="22" fill="#fff">👩</text>
+
+  <text x="80" y="88" font-family="Segoe UI, sans-serif" font-size="32" fill="#e2e8f0">Relación colaborativa</text>
+  <text x="80" y="462" font-family="Segoe UI, sans-serif" font-size="24" fill="#93c5fd">Desbloqueo fluido, pocas minas activas y progreso espejo balanceado.</text>
+</svg>

@@ -137,7 +137,104 @@
         </section>
       </aside>
     </section>
+
+    <section class="panel guide" id="manualJuego">
+      <h2>Manual breve del juego</h2>
+      <ol class="guide-list">
+        <li>Cada bloque representa una <strong>actividad, reto o acción</strong> de la relación.</li>
+        <li>El tablero está dividido por secciones de color traslúcido para organizar temas.</li>
+        <li>Se juega por turnos alternados: primero <strong>Hombre</strong>, luego <strong>Mujer</strong>.</li>
+        <li>Solo se puede avanzar un bloque adyacente (arriba, abajo, izquierda o derecha) en el propio lado.</li>
+        <li>Al tocar un bloque sale un pop up con significado y decisión: <strong>Desbloquear</strong> o <strong>No realizar</strong>.</li>
+        <li>Las minas son <strong>no negociables</strong>; cada relación define las suyas.</li>
+      </ol>
+    </section>
+
+    <section class="panel docs" id="documentacion">
+      <h2>Documentación (qué, por qué, cómo y para qué)</h2>
+      <div class="doc-grid">
+        <article class="doc-card">
+          <h3>Qué es</h3>
+          <p>Un tablero conversacional para visualizar acuerdos, límites y avances en pareja.</p>
+        </article>
+        <article class="doc-card">
+          <h3>Por qué existe</h3>
+          <p>Para aterrizar temas difíciles en acciones concretas y reducir malentendidos.</p>
+        </article>
+        <article class="doc-card">
+          <h3>Cómo se usa</h3>
+          <p>Se avanza por turnos, se explican bloques, se marcan no negociables y se guarda el mapa.</p>
+        </article>
+        <article class="doc-card">
+          <h3>Para qué sirve</h3>
+          <p>Para abrir conversación, negociar límites sanos y construir reciprocidad de forma visible.</p>
+        </article>
+        <article class="doc-card">
+          <h3>Idea original</h3>
+          <p>Convertir la relación en un mapa vivo: lo que se conversa, se recorre; lo que se evita, también se ve.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel gallery" id="tiposRelacion">
+      <h2>Ejemplos de juego por tipo de relación</h2>
+      <div class="image-grid image-grid-2">
+        <article class="image-card">
+          <img src="/assets/images/relacion-colaborativa.svg" alt="Ejemplo de relación colaborativa" />
+          <h3>Relación colaborativa</h3>
+          <p>Predomina apertura y cooperación. Se desbloquean más bloques con menos minas activas.</p>
+        </article>
+        <article class="image-card">
+          <img src="/assets/images/relacion-limites-estrictos.svg" alt="Ejemplo de relación con límites estrictos" />
+          <h3>Relación con límites estrictos</h3>
+          <p>Hay más no negociables; el avance es más lento, pero más claro y con reglas fuertes.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel gallery" id="apegos">
+      <h2>Mini tableros horizontales por estilo de apego</h2>
+      <div class="image-grid image-grid-4">
+        <article class="image-card small">
+          <img src="/assets/images/apego-seguro.svg" alt="Tablero mini de apego seguro" />
+          <h3>Apego seguro</h3>
+          <p>Avance balanceado y desbloqueo estable por confianza.</p>
+        </article>
+        <article class="image-card small">
+          <img src="/assets/images/apego-ansioso.svg" alt="Tablero mini de apego ansioso" />
+          <h3>Apego ansioso</h3>
+          <p>Se revelan zonas emocionales primero por búsqueda de validación.</p>
+        </article>
+        <article class="image-card small">
+          <img src="/assets/images/apego-evitativo.svg" alt="Tablero mini de apego evitativo" />
+          <h3>Apego evitativo</h3>
+          <p>Avance más racional y gradual, priorizando autonomía y control de riesgo.</p>
+        </article>
+        <article class="image-card small">
+          <img src="/assets/images/apego-desorganizado.svg" alt="Tablero mini de apego desorganizado" />
+          <h3>Apego desorganizado</h3>
+          <p>Patrón irregular: alterna acercamiento y retiro, con minas en zonas sensibles.</p>
+        </article>
+      </div>
+    </section>
   </main>
+
+  <dialog id="introModal" class="block-modal intro-modal">
+    <article class="modal-card">
+      <h3>Antes de empezar: proceso y analogía</h3>
+      <p>
+        Piensa el tablero como una mezcla entre mapa y videojuego de cooperación:
+        cada bloque es una conversación accionable, cada mina es un no negociable,
+        y cada turno representa reciprocidad real en la relación.
+      </p>
+      <p>
+        Resumen rápido: explorar, decidir, desbloquear o pausar; guardar avances; volver a conversar.
+      </p>
+      <div class="button-inline">
+        <button id="introContinueBtn" type="button">Entendido, empezar</button>
+      </div>
+    </article>
+  </dialog>
 
   <dialog id="blockModal" class="block-modal">
     <article class="modal-card">

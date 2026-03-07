@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="260" viewBox="0 0 900 260" role="img" aria-label="Apego seguro">
+  <rect width="900" height="260" fill="#0f172a"/>
+  <g transform="translate(24,54)">
+    <rect x="0" y="0" width="94" height="56" rx="10" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="104" y="0" width="94" height="56" rx="10" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="208" y="0" width="94" height="56" rx="10" fill="#c084fc33" stroke="#c084fc"/>
+    <rect x="312" y="0" width="94" height="56" rx="10" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="416" y="0" width="94" height="56" rx="10" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="520" y="0" width="94" height="56" rx="10" fill="#22d3ee33" stroke="#22d3ee"/>
+    <rect x="624" y="0" width="94" height="56" rx="10" fill="#60a5fa33" stroke="#60a5fa"/>
+    <rect x="728" y="0" width="94" height="56" rx="10" fill="#22d3ee33" stroke="#22d3ee"/>
+  </g>
+  <text x="24" y="34" font-size="24" fill="#bae6fd" font-family="Segoe UI, sans-serif">Apego seguro</text>
+  <text x="24" y="236" font-size="18" fill="#93c5fd" font-family="Segoe UI, sans-serif">Revelado gradual y estable; confianza sostenida.</text>
+</svg>
