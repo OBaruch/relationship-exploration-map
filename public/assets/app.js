@@ -52,6 +52,8 @@ const els = {
   modalCloseBtn: document.getElementById("modalCloseBtn"),
   introModal: document.getElementById("introModal"),
   introContinueBtn: document.getElementById("introContinueBtn"),
+  toggleDocsBtn: document.getElementById("toggleDocsBtn"),
+  knowledgeContent: document.getElementById("knowledgeContent"),
 };
 
 const appState = {
@@ -66,6 +68,8 @@ const appState = {
     female: { r: CENTER, c: CENTER + 1, icon: "👩" },
   },
   modalCell: null,
+  docsVisible: true,
+  docsPinned: false,
 };
 
 function cellKey(cell) {
@@ -220,9 +224,35 @@ function closeIntroModal() {
   if (els.introModal.open) els.introModal.close();
 }
 
+function isMobileView() {
+  return window.matchMedia("(max-width: 760px)").matches;
+}
+
+function updateResponsiveBoardSize() {
+  const parentWidth = els.board?.parentElement?.clientWidth || window.innerWidth;
+  const usable = Math.max(280, parentWidth - 28);
+  const gap = 4;
+  const boardPadding = 24;
+  const rawSize = Math.floor((usable - boardPadding - gap * (SIZE - 1)) / SIZE);
+  const cellSize = Math.max(28, Math.min(48, rawSize));
+  document.documentElement.style.setProperty("--cell-size", `${cellSize}px`);
+}
+
+function setKnowledgeVisible(visible) {
+  appState.docsVisible = Boolean(visible);
+  if (els.knowledgeContent) {
+    els.knowledgeContent.hidden = !appState.docsVisible;
+  }
+  if (els.toggleDocsBtn) {
+    els.toggleDocsBtn.textContent = appState.docsVisible ? "Ocultar guía extendida" : "Mostrar guía extendida";
+    els.toggleDocsBtn.setAttribute("aria-expanded", String(appState.docsVisible));
+  }
+}
+
 function render() {
   els.board.innerHTML = "";
-  els.board.style.gridTemplateColumns = `repeat(${SIZE}, 48px)`;
+  updateResponsiveBoardSize();
+  els.board.style.gridTemplateColumns = `repeat(${SIZE}, var(--cell-size))`;
 
   appState.board.forEach((row) => {
     row.forEach((cell) => {
@@ -605,11 +635,31 @@ function bindEvents() {
   if (els.introContinueBtn) {
     els.introContinueBtn.addEventListener("click", closeIntroModal);
   }
+
+  if (els.toggleDocsBtn) {
+    els.toggleDocsBtn.addEventListener("click", () => {
+      appState.docsPinned = true;
+      setKnowledgeVisible(!appState.docsVisible);
+    });
+  }
+
+  window.addEventListener("resize", () => {
+    updateResponsiveBoardSize();
+    if (!appState.docsPinned) {
+      setKnowledgeVisible(!isMobileView());
+    }
+  });
+
+  window.addEventListener("orientationchange", () => {
+    updateResponsiveBoardSize();
+  });
 }
 
 async function init() {
   buildInitialBoard();
   bindEvents();
+  updateResponsiveBoardSize();
+  setKnowledgeVisible(!isMobileView());
   render();
   await Promise.all([checkHealth(), refreshMaps().catch(() => null)]);
   setStatus("App lista. Turnos activos: desbloqueo alternado 1 en 1.");
